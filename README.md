@@ -178,7 +178,7 @@ The SmartCalc v1.0 program must be implemented:
 
 - The program must be developed in C language of C11 standard using gcc compiler. You can use any additional QT libraries and modules
 - The program code must be located in the src folder
-- The program must be built with Makefile which contains standard set of targets for GNU-programs: all, install, uninstall, clean, dvi, dist, tests, gcov_report. Installation directory could be arbitrary, except the building one
+- The program must be built with Makefile which contains standard set of targets for GNU-programs: all, install, uninstall, clean, dvi, dist, test, gcov_report. Installation directory could be arbitrary, except the building one
 - The program must be developed according to the principles of structured programming
 - When writing code it is necessary to follow the Google style
 - Prepare full coverage of modules related to calculating expressions with unit-tests using the Check library
