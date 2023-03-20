@@ -182,7 +182,9 @@ The SmartCalc v1.0 program must be implemented:
 - The program must be developed according to the principles of structured programming
 - When writing code it is necessary to follow the Google style
 - Prepare full coverage of modules related to calculating expressions with unit-tests using the Check library
-- GUI implementation, based on any GUI library with API for C89/C99/C11 (GTK+, Nuklear, raygui, microui, libagar, libui, IUP, LCUI, CEF, Qt, etc.)
+- GUI implementation, based on any GUI library with API for C89/C99/C11 
+<br/>For Linix: GTK+, CEF, Qt
+<br/>For Mac: GTK+, Nuklear, raygui, microui, libagar, libui, IUP, LCUI, CEF, Qt
 - Both integers and real numbers with a dot can be input into the program. You can optionally provide the input of numbers in exponential notation
 - The calculation must be done after you complete entering the calculating expression and press the `=` symbol.
 - Calculating arbitrary bracketed arithmetic expressions in infix notation
@@ -240,4 +242,4 @@ Provide a special mode "deposit profitability calculator" (you can take banki.ru
 
 
 
-💡 [Tap here](https://forms.yandex.ru/u/6357d9a773cee730f2ba7e9d/) **to leave your feedback on the project**. Pedago Team really tries to make your educational experience better.
+💡 [Tap here](https://forms.yandex.ru/cloud/6418155a6938722388a12878/) **to leave your feedback on the project**. Pedago Team really tries to make your educational experience better.
