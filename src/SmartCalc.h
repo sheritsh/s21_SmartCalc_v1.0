@@ -17,5 +17,6 @@
 #include "modules/headers/input_validation.h"
 #include "modules/headers/shunting_yard.h"
 #include "modules/headers/stack.h"
+#include "modules/headers/tokens_devider.h"
 
 #endif  // SMART_CALC_H
