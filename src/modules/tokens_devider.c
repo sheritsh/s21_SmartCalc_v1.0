@@ -130,7 +130,6 @@ void missing_mult_signs_handler(char* str) {
 
     for (char* ptr = str; *ptr != '\0'; ptr++) {
       int cur_lexema_length = 0;
-      printf("\titerated str [%s]\n", ptr);
       // arrange lexema
       if (current_word) {
         for (char* insptr = ptr; *insptr != ' '; insptr++) {
@@ -203,5 +202,25 @@ void add_end_of_line(char* str) {
   if (str != NULL) {
     *(str + strlen(str)) = '<';
     *(str + strlen(str) + 1) = '\0';
+  }
+}
+
+void x_replacement_to_value(char* str, long double value) {
+  if (str != NULL) {
+    // the allowed number will prevent an attempt to litter
+    // the output window by multiple creation of x
+    int allowed_amount = 20;
+    char insert_value[256] = {'\0'};
+    sprintf(insert_value, "%Lf", value);
+    size_t value_length = strlen(insert_value);
+    for (char* ptr = str; *ptr != '\0'; ptr++) {
+      if (*ptr == 'x') {
+        if (allowed_amount) {
+          memmove(ptr + value_length - 1, ptr, strlen(ptr));
+          memmove(ptr, insert_value, value_length);
+          allowed_amount--;
+        }
+      }
+    }
   }
 }

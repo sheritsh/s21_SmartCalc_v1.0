@@ -1,7 +1,5 @@
 #include "headers/calculate.h"
 
-#include <math.h>
-
 long double calculate_res(char* str) {
   if (str == NULL) {
     return 0;
@@ -16,7 +14,6 @@ long double calculate_res(char* str) {
   double_stack_t* calculation_stack = init_double_stack();
   if (calculation_stack != NULL) {
     char* token = strtok(temp, " ");
-
     while (token != NULL && !is_error) {
       is_error = !calculations(token, calculation_stack, &result);
       token = strtok(NULL, " ");
@@ -25,9 +22,10 @@ long double calculate_res(char* str) {
     remove_double_stack(calculation_stack);
     free(calculation_stack);
     calculation_stack = NULL;
+  } else {
+    is_error = true;
   }
 
-  // return is_error == 0 ? result : 0;
   return is_error == 0 ? result : NAN;
 }
 
@@ -38,17 +36,13 @@ bool calculations(char* token, double_stack_t* calculation_stack,
   }
 
   bool is_success = true;
-
   if (strchr("0123456789.", (int)*token)) {
-    printf("zalupochka\n");
     push_into_double(calculation_stack, strtold(token, &token));
   } else if (strchr(OPERATORS, (int)*token)) {
     long double res = 0;
     is_success = calculate_from_stack(calculation_stack, &res, (int)*token);
     if (is_success) {
       push_into_double(calculation_stack, res);
-    } else {
-      printf("\t\t\tNAN\n");
     }
   } else if (*token == '~') {
     // handle UNARY
@@ -71,6 +65,10 @@ bool calculations(char* token, double_stack_t* calculation_stack,
 
 bool calculate_from_stack(double_stack_t* calculation_stack, long double* res,
                           int sign) {
+  if (calculation_stack == NULL || res == NULL) {
+    return false;
+  }
+
   long double val1 = pop_double_stack(calculation_stack);
   long double val2 = pop_double_stack(calculation_stack);
 
@@ -91,6 +89,10 @@ bool calculate_from_stack(double_stack_t* calculation_stack, long double* res,
 
 bool calculate_func(double_stack_t* calculation_stack, long double* res,
                     char* func) {
+  if (calculation_stack == NULL || res == NULL || func == NULL) {
+    return false;
+  }
+
   long double value = pop_double_stack(calculation_stack);
 
   if (strstr(func, "mod")) {

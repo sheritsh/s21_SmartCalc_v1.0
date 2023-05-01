@@ -46,7 +46,6 @@ bool dijkstra_logic(char* token, calc_stack_t* calc_stack, char* buffer) {
     push(calc_stack, token);
   } else if (*token == ')') {
     decide_on_closure_brackets(calc_stack, buffer, &is_success);
-    printf("BUG?????%d\n", is_success);
   } else if (*token == '<') {
     is_success = handle_EOL(calc_stack, buffer);
   }

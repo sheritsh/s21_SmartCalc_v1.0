@@ -55,4 +55,13 @@ void unary_operators_handler(char* str);
  */
 void add_end_of_line(char* str);
 
+/**
+ * @brief
+The function iterates over the string and replaces all 'X' with the input long
+double value
+ * @param str pointer to the input str
+ * @param value long double value for peplace 'X'
+ */
+void x_replacement_to_value(char* str, long double value);
+
 #endif  // TOKENS_DEVIDER_H

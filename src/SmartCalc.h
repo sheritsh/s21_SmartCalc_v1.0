@@ -19,4 +19,13 @@
 #include "modules/headers/stack.h"
 #include "modules/headers/tokens_devider.h"
 
+/**
+ * @brief The function to launch the calculator.
+ * @param str string in infix notation
+ * @return bool :
+ * 0 - successfull
+ * 1 - failure. ERROR!
+ */
+int smart_calc_init(char* str);
+
 #endif  // SMART_CALC_H
