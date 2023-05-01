@@ -1,28 +1,25 @@
 #include "headers/input_validation.h"
 
 bool is_input_valid(char* str) {
-  if (str == NULL || *str == 'e' || *str == ')') {
+  if (str == NULL) {
+    return false;
+  } else if (*str == 'e' || *str == ')') {
     return false;
   }
 
   bool is_valid = true;
   int arg_len = (int)strlen(str);
 
-  printf("input to validate %s\n", str);
-  int i = 0;
-  for (char* ptr = str; *ptr != '\0' && is_valid; ptr++, i++) {
+  for (char* ptr = str; *ptr != '\0' && is_valid; ptr++) {
     char cur_char = *ptr;
-    printf("testing char [%c]\n", cur_char);
     if (strchr(PERMITTED_SYMBOLS, (int)cur_char) != NULL) {
-      printf("premitted\n");
       if (strchr(NUMBERS, (int)cur_char) || cur_char == 'x') {
-        printf("numb\n");
+        // number - OKAY
       } else {
         int step = handle_symbols(ptr);
         if (step) {
           ptr += step - 1;
         } else {
-          printf("falsim\n");
           is_valid = false;
         }
       }
@@ -35,7 +32,10 @@ bool is_input_valid(char* str) {
 }
 
 int handle_symbols(char* ptr) {
-  printf("We are in handle symbs to test %s\n", ptr);
+  if (ptr == NULL) {
+    return 0;
+  }
+
   int valid_symbols = 0;
   char str_to_analyze[6] = {'\0'};
   strncat(str_to_analyze, ptr, 5);
@@ -84,7 +84,6 @@ int handle_symbols(char* ptr) {
     }
   }
 
-  printf("result of hs %d\n", valid_symbols);
   return valid_symbols;
 }
 
@@ -93,17 +92,14 @@ bool check_is_dot_valid(char* str) {
     return false;
   }
 
-  // !strchr(NUMBERS, (int)*(str + 1)) || *(str + 1) == '\0'
-
-  str++;
   bool has_significant = strchr(NUMBERS, (int)*(str - 2)) ? true : false;
   bool is_dot_single = true;
   bool is_only_numbers = true;
-
+  // now go to the next character and test after '.'
+  str++;
   if (!has_significant && (!strchr(NUMBERS, (int)*(str)) || *(str) == '\0')) {
     is_dot_single = false;
   }
-
   for (char* ptr = str; *ptr != '\0' && is_dot_single && is_only_numbers;
        ptr++) {
     char cur_char = *ptr;
@@ -119,18 +115,16 @@ bool check_is_dot_valid(char* str) {
 }
 
 int handle_exponent(char* str) {
-  if (str == NULL || *(str + 1) == '\0') {
+  if (str == NULL) {
+    return 0;
+  } else if (*(str + 1) == '\0') {
     return 0;
   }
 
-  printf("exponent test %s\n", str);
   int valid_symbols = 0;
-  char* test;
   bool error = false;
   if (strchr(NUMBERS, (int)*(str - 1))) {
-    if (test = strchr("+-", (int)*(str + 1))) {
-      printf("KAK BLYAT TI SYUDA ZAHODISH??? [%s]\n", test);
-      printf("numb %c\n", (int)*(str + 1));
+    if (strchr("+-", (int)*(str + 1))) {
       if (strchr(NUMBERS, (int)*(str + 2))) {
         valid_symbols += 2;
         str += 2;
@@ -138,7 +132,6 @@ int handle_exponent(char* str) {
         error = true;
       }
     } else if (!strchr(NUMBERS, (int)*(str + 1))) {
-      printf("Vperedi zalupa posle e\n");
       error = true;
     } else {
       valid_symbols++;
@@ -159,6 +152,5 @@ int handle_exponent(char* str) {
     }
   }
 
-  printf("exp test res -> %d\n", error == 0 ? valid_symbols : 0);
   return error == 0 ? valid_symbols : 0;
 }
