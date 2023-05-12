@@ -73,19 +73,13 @@ void remove_stack(calc_stack_t* stack) {
  *************************/
 
 double_stack_t* init_double_stack() {
-  bool is_error = false;
   double_stack_t* newstack = (double_stack_t*)calloc(1, sizeof(double_stack_t));
-  if (newstack == NULL) {
-    is_error = true;
-  } else {
+  if (newstack != NULL) {
     newstack->length = 0;
     newstack->values = (long double*)calloc(MAX_LEN, sizeof(long double*));
-    if (newstack->values == NULL) {
-      is_error = true;
-    }
   }
 
-  return newstack;
+  return newstack->values != NULL ? newstack : NULL;
 }
 
 bool is_double_stack_empty(double_stack_t* stack) {

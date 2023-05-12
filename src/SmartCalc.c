@@ -1,14 +1,14 @@
 #include "SmartCalc.h"
 
-int main(int argc, char* argv[]) {
-  if (argc > 1) {
-    // smart_calc_init(argv[1]);
-    char res[510];
-    api_infix_to_postfix_notation(argv[1], res);
-    printf("[%s]\n", res);
-  }
-  return 0;
-}
+// int main(int argc, char* argv[]) {
+//   if (argc > 1) {
+//     // smart_calc_init(argv[1]);
+//     char res[510];
+//     api_infix_to_postfix_notation(argv[1], res);
+//     printf("[%s]\n", res);
+//   }
+//   return 0;
+// }
 
 // int smart_calc_init(char* str) {
 //   if (str == NULL) {

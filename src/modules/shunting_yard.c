@@ -137,7 +137,6 @@ void decide_on_operators(char* token, calc_stack_t* calc_stack, char* buffer) {
 void decide_on_closure_brackets(calc_stack_t* calc_stack, char* buffer,
                                 bool* is_success) {
   if (calc_stack != NULL && buffer != NULL && is_success != NULL) {
-    bool has_operator_in_stack = false;
     bool has_open_pair = false;
     bool is_end = false;
 
@@ -146,7 +145,6 @@ void decide_on_closure_brackets(calc_stack_t* calc_stack, char* buffer,
         if (*(peek(calc_stack)) != '(') {
           strcat(buffer, pop(calc_stack));
           strcat(buffer, " ");
-          has_operator_in_stack = true;
         } else {
           has_open_pair = true;
           pop(calc_stack);

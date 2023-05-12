@@ -108,7 +108,6 @@ int exp_notation_length(char* str) {
     return 0;
   }
 
-  bool is_number_end = false;
   bool has_sign = false;
   int real_part = (int)strspn(str, "1234567890.");
 
