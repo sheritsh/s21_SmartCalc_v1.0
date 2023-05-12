@@ -5,9 +5,8 @@ long double calculate_res(char* str) {
     return 0;
   }
 
-  char temp[MAX_LEN] = {'\0'};
-  strcpy(temp, str);
-
+  char temp[MAX_LEN + 1] = {'\0'};
+  strncpy(temp, str, MAX_LEN);
   long double result = 0;
   bool is_error = false;
 

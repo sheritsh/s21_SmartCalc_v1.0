@@ -110,7 +110,6 @@ int exp_notation_length(char* str) {
 
   bool is_number_end = false;
   bool has_sign = false;
-  int length = 0;
   int real_part = (int)strspn(str, "1234567890.");
 
   str += real_part + 1;
@@ -129,11 +128,9 @@ void missing_mult_signs_handler(char* str) {
     int current_word = 0;
 
     for (char* ptr = str; *ptr != '\0'; ptr++) {
-      int cur_lexema_length = 0;
       // arrange lexema
       if (current_word) {
         for (char* insptr = ptr; *insptr != ' '; insptr++) {
-          cur_lexema_length++;
         }
         // handling multiplier for numbers
         if (*ptr == 'x' || *ptr == '(' || strchr(FUNCS, (int)*ptr)) {
@@ -175,7 +172,6 @@ void unary_operators_handler(char* str) {
     int current_word = 0;
 
     for (char* ptr = str; *ptr != '\0'; ptr++) {
-      int cur_lexema_length = 0;
       if (current_word) {
         if (*ptr == '+' || *ptr == '-') {
           if (strchr(prev_lexema, '(')) {
@@ -207,18 +203,28 @@ void add_end_of_line(char* str) {
 
 void x_replacement_to_value(char* str, long double value) {
   if (str != NULL) {
-    // the allowed number will prevent an attempt to litter
-    // the output window by multiple creation of x
-    int allowed_amount = 20;
+    size_t str_length_before = strlen(str);
+    int allowed_amount = MAX_LEN - str_length_before;
     char insert_value[256] = {'\0'};
-    sprintf(insert_value, "%Lf", value);
-    size_t value_length = strlen(insert_value);
-    for (char* ptr = str; *ptr != '\0'; ptr++) {
+    memset(insert_value, '\0', 256);
+    insert_value[0] = '(';
+    insert_value[1] = ' ';
+    snprintf(insert_value + 2, MAX_LEN - 4, "%Lf", value);
+    if (insert_value[2] == '-') {
+      insert_value[2] = '~';
+      memmove(insert_value + 4, insert_value + 3, strlen(insert_value));
+      insert_value[3] = ' ';
+    }
+    insert_value[strlen(insert_value)] = ' ';
+    insert_value[strlen(insert_value)] = ')';
+    int value_length = strlen(insert_value);
+    for (char* ptr = str; *ptr != '\0' && (allowed_amount - value_length) > 0;
+         ptr++) {
       if (*ptr == 'x') {
         if (allowed_amount) {
           memmove(ptr + value_length - 1, ptr, strlen(ptr));
           memmove(ptr, insert_value, value_length);
-          allowed_amount--;
+          allowed_amount -= value_length;
         }
       }
     }

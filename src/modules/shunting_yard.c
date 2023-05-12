@@ -10,14 +10,19 @@ bool dijkstra_runner(char* str) {
   calc_stack_t* workstack = init_stack();
   if (workstack != NULL) {
     char* token = strtok(str, " ");
-    while (token != NULL && is_success) {
+    int allowed_len = MAX_LEN * 2;
+    while (token != NULL && is_success &&
+           allowed_len - (int)strlen(token) > 0) {
       is_success = dijkstra_logic(token, workstack, buffer);
       token = strtok(NULL, " ");
+      if (token != NULL) {
+        allowed_len -= (int)strlen(token) + 1;  // 1 -> size of space char
+      }
     }
     remove_stack(workstack);
     free(workstack);
     workstack = NULL;
-    strcpy(str, buffer);
+    strncpy(str, buffer, MAX_LEN * 2);
   } else {
     is_success = false;
   }
@@ -53,20 +58,20 @@ bool dijkstra_logic(char* token, calc_stack_t* calc_stack, char* buffer) {
   return is_success;
 }
 
-int check_precedence(int operator) {
+int check_precedence(int operator_code) {
   int operator_precedence = 0;
 
-  if (operator== '(') {
+  if (operator_code == '(') {
     operator_precedence = OPEN_BRACKET;
-  } else if (operator== '+') {
+  } else if (operator_code == '+') {
     operator_precedence = PLUS;
-  } else if (operator== '-') {
+  } else if (operator_code == '-') {
     operator_precedence = MINUS;
-  } else if (operator== '*') {
+  } else if (operator_code == '*') {
     operator_precedence = MULT;
-  } else if (operator== '/') {
+  } else if (operator_code == '/') {
     operator_precedence = DIV;
-  } else if (operator== '^') {
+  } else if (operator_code == '^') {
     operator_precedence = POW;
   }
 

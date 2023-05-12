@@ -53,7 +53,7 @@ bool handle_EOL(calc_stack_t* calc_stack, char* buffer);
  * @brief The function checks the precedence of operator
  * @return precedence of the operator
  */
-int check_precedence(int operator);
+int check_precedence(int operator_code);
 
 /**
  * @brief Gets the first character of the token, in our case a shortened version

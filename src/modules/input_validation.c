@@ -8,7 +8,6 @@ bool is_input_valid(char* str) {
   }
 
   bool is_valid = true;
-  int arg_len = (int)strlen(str);
 
   for (char* ptr = str; *ptr != '\0' && is_valid; ptr++) {
     char cur_char = *ptr;
