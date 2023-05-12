@@ -28,17 +28,6 @@ long double get_total_earned(long double* deposit_amount, double term,
 long double get_tax_amount(long double total_amount, long double tax_rate);
 
 /**
- * @brief Calculates how much during the deposit period was withdrawn or
- * replenished with monthly payments.
- * @param replenishments amount of monthly top-ups
- * @param withdraws amount of monthly withdrawals
- * @param term deposit period in months
- * @return amount of money
- */
-long double get_cumulative_earnings(long double replenishments,
-                                    long double withdraws, double term);
-
-/**
  * @brief Calculates total amount of money along with earned.
  * @return total amount of money
  */

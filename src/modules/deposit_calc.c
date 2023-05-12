@@ -4,18 +4,6 @@ long double get_tax_amount(long double total_amount, long double tax_rate) {
   return total_amount * tax_rate / 100;
 }
 
-long double get_cumulative_earnings(long double replenishments,
-                                    long double withdraws, double term) {
-  long double cumulative_earnings = 0;
-
-  for (int month = 0; month < term; month++) {
-    cumulative_earnings += replenishments;
-    cumulative_earnings -= withdraws;
-  }
-
-  return cumulative_earnings;
-}
-
 long double get_total_amount(long double deposit_amount,
                              long double earned_money, long double tax_amount) {
   return deposit_amount + earned_money - tax_amount;

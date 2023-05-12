@@ -416,6 +416,61 @@ START_TEST(calculate_opt_10) {
 }
 END_TEST
 
+START_TEST(loan_calc_opt_1) {
+  long double res = get_monthly_payment_annuity(100000, 5, 12);
+  ck_assert_ldouble_eq(res, 8560.748);
+}
+END_TEST
+
+START_TEST(loan_calc_opt_2) {
+  long double res = get_total_payment_annuity(8560.748, 12);
+  ck_assert_ldouble_eq(res, 102729);
+}
+END_TEST
+
+START_TEST(loan_calc_opt_3) {
+  long double res = get_monthly_payment_diff(100000, 12);
+  ck_assert_ldouble_eq(res, 8559.028);
+}
+END_TEST
+
+START_TEST(loan_calc_opt_4) {
+  long double res = get_total_payment_diff(100000, 12, 5);
+  ck_assert_ldouble_eq(res, 102708.3);
+}
+END_TEST
+
+START_TEST(loan_calc_opt_5) {
+  long double res = get_overpayment_on_credit(100000, 102729);
+  ck_assert_ldouble_eq(res, 2729);
+}
+END_TEST
+
+START_TEST(loan_calc_opt_6) {
+  double res = convert_years_to_months(1);
+  ck_assert_double_eq(res, 12);
+}
+END_TEST
+
+START_TEST(deposit_calc_opt_1) {
+  long double deposit_amount = 100000;
+  long double res = get_total_earned(&deposit_amount, 12, 5, 0, false, 0, 0);
+  ck_assert_ldouble_eq(res, 5000);
+}
+END_TEST
+
+START_TEST(deposit_calc_opt_2) {
+  long double res = get_tax_amount(104850, 3);
+  ck_assert_ldouble_eq(res, 150);
+}
+END_TEST
+
+START_TEST(deposit_calc_opt_3) {
+  long double res = get_total_amount(100000, 5000, 3);
+  ck_assert_ldouble_eq(res, 104850);
+}
+END_TEST
+
 /*  TEST SUITES */
 
 Suite* input_validation_suite(void) {
@@ -500,6 +555,31 @@ Suite* calculate_suite(void) {
   return suite;
 }
 
+Suite* loan_calc_suite(void) {
+  Suite* suite = suite_create("loan_calc_tests");
+  TCase* tc_core = tcase_create("core_of_loan_calc");
+  tcase_add_test(tc_core, loan_calc_opt_1);
+  tcase_add_test(tc_core, loan_calc_opt_2);
+  tcase_add_test(tc_core, loan_calc_opt_3);
+  tcase_add_test(tc_core, loan_calc_opt_4);
+  tcase_add_test(tc_core, loan_calc_opt_5);
+  tcase_add_test(tc_core, loan_calc_opt_6);
+  suite_add_tcase(suite, tc_core);
+
+  return suite;
+}
+
+Suite* deposit_calc_suite(void) {
+  Suite* suite = suite_create("deposit_calc_tests");
+  TCase* tc_core = tcase_create("core_of_deposit_calc");
+  tcase_add_test(tc_core, deposit_calc_opt_1);
+  tcase_add_test(tc_core, deposit_calc_opt_2);
+  tcase_add_test(tc_core, deposit_calc_opt_3);
+  suite_add_tcase(suite, tc_core);
+
+  return suite;
+}
+
 /*  SUITES EXECUTION SCRIPT */
 
 void s21_suit_execution(Suite* suite, int* failed_count, char* suite_name) {
@@ -524,6 +604,9 @@ int main(void) {
                      "tests/shunting_yard_tests.log");
   s21_suit_execution(calculate_suite(), &failed_count,
                      "tests/calculate_tests.log");
-
+  s21_suit_execution(loan_calc_suite(), &failed_count,
+                     "tests/loan_calc_tests.log");
+  s21_suit_execution(deposit_calc_suite(), &failed_count,
+                     "tests/deposit_calc_tests.log");
   return failed_count == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
