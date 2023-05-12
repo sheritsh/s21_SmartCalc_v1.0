@@ -7,8 +7,8 @@
 #include "../SmartCalc.h"
 
 enum test_res {
-  FAILURE,
-  SUCCESS
+  OK,
+  FAILURE
 }
 
 void s21_suit_execution(Suite *suite, int *failed_count, char *suite_name);
