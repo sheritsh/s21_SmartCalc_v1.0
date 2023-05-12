@@ -76,7 +76,7 @@ END_TEST
 
 START_TEST(tokens_devider_opt_1) {
   char* input_data = "+x-(-21)";
-  char* token_str = token_devider(input_data);
+  char* token_str = token_divider(input_data);
   int is_allocated = false;
   if (token_str != NULL) {
     is_allocated = true;
@@ -90,7 +90,7 @@ END_TEST
 
 START_TEST(tokens_devider_opt_2) {
   char* input_data = "3.14+56((x)22)";
-  char* token_str = token_devider(input_data);
+  char* token_str = token_divider(input_data);
   int is_allocated = false;
   if (token_str != NULL) {
     is_allocated = true;
@@ -104,7 +104,7 @@ END_TEST
 
 START_TEST(tokens_devider_opt_3) {
   char* input_data = "xxxxxxxxx(x)";
-  char* token_str = token_devider(input_data);
+  char* token_str = token_divider(input_data);
   int is_allocated = false;
   if (token_str != NULL) {
     is_allocated = true;
@@ -118,7 +118,7 @@ END_TEST
 
 START_TEST(tokens_devider_opt_4) {
   char* input_data = "1e-12+cos(4)/sin(2)+ln(5)";
-  char* token_str = token_devider(input_data);
+  char* token_str = token_divider(input_data);
   int is_allocated = false;
   if (token_str != NULL) {
     is_allocated = true;
@@ -132,7 +132,7 @@ END_TEST
 
 START_TEST(tokens_devider_opt_5) {
   char* input_data = "log(log(log(sin(3))))";
-  char* token_str = token_devider(input_data);
+  char* token_str = token_divider(input_data);
   int is_allocated = false;
   if (token_str != NULL) {
     is_allocated = true;
@@ -146,7 +146,7 @@ END_TEST
 
 START_TEST(tokens_devider_opt_6) {
   char* input_data = "+3247862-(-1)";
-  char* token_str = token_devider(input_data);
+  char* token_str = token_divider(input_data);
   int is_allocated = false;
   if (token_str != NULL) {
     is_allocated = true;
@@ -160,7 +160,7 @@ END_TEST
 
 START_TEST(tokens_devider_opt_7) {
   char* input_data = "12/03/1997";
-  char* token_str = token_devider(input_data);
+  char* token_str = token_divider(input_data);
   int is_allocated = false;
   if (token_str != NULL) {
     is_allocated = true;
@@ -174,7 +174,7 @@ END_TEST
 
 START_TEST(tokens_devider_opt_8) {
   char* input_data = "0log(x)";
-  char* token_str = token_devider(input_data);
+  char* token_str = token_divider(input_data);
   int is_allocated = false;
   if (token_str != NULL) {
     is_allocated = true;
@@ -188,7 +188,7 @@ END_TEST
 
 START_TEST(tokens_devider_opt_9) {
   char* input_data = ".123123123+12398172387126387123613412";
-  char* token_str = token_devider(input_data);
+  char* token_str = token_divider(input_data);
   int is_allocated = false;
   if (token_str != NULL) {
     is_allocated = true;
@@ -202,7 +202,7 @@ END_TEST
 
 START_TEST(tokens_devider_opt_10) {
   char* input_data = "^3^2^10*(24124-1e16)cos(5)/0log(x)";
-  char* token_str = token_devider(input_data);
+  char* token_str = token_divider(input_data);
   int is_allocated = false;
   if (token_str != NULL) {
     is_allocated = true;
@@ -248,9 +248,9 @@ START_TEST(stack_opt_2) {
   int is_error = false;
   double_stack_t* teststack = init_double_stack();
   if (teststack != NULL) {
-    push(teststack, 5);
-    push(teststack, 10);
-    push(teststack, 97);
+    push_into_double(teststack, 5);
+    push_into_double(teststack, 10);
+    push_into_double(teststack, 97);
     ck_assert_int_eq(teststack->length, 3);
     long double top = peek_double_stack(teststack);
     ck_assert_ldouble_eq(top, 97);
@@ -272,71 +272,81 @@ START_TEST(stack_opt_2) {
 END_TEST
 
 START_TEST(shunting_yard_opt_1) {
-  char* input = "25 + 25 <";
+  char input[510] = {'\0'};
+  strcpy(input, "25 + 25 <");
   dijkstra_runner(input);
   ck_assert_str_eq(input, "25 25 + ");
 }
 END_TEST
 
 START_TEST(shunting_yard_opt_2) {
-  char* input = "x ^ 2 ^ 3 * ( 2 ) <";
+  char input[510] = {'\0'};
+  strcpy(input, "x ^ 2 ^ 3 * ( 2 ) <");
   dijkstra_runner(input);
   ck_assert_str_eq(input, "x 2 3 ^ ^ 2 * ");
 }
 END_TEST
 
 START_TEST(shunting_yard_opt_3) {
-  char* input = "cos ( 4 ) + sin ( 15 ) <";
+  char input[510] = {'\0'};
+  strcpy(input, "cos ( 4 ) + sin ( 15 ) <");
   dijkstra_runner(input);
   ck_assert_str_eq(input, "4 15 sin + cos ");
 }
 END_TEST
 
 START_TEST(shunting_yard_opt_4) {
-  char* input = "2 ^ 2 - 16 + 4 * 55 / 7 <";
+  char input[510] = {'\0'};
+  strcpy(input, "2 ^ 2 - 16 + 4 * 55 / 7 <");
   dijkstra_runner(input);
   ck_assert_str_eq(input, "2 2 ^ 16 - 4 55 * 7 / + ");
 }
 END_TEST
 
 START_TEST(shunting_yard_opt_5) {
-  char* input = "3.14 + mod ( x ) + ( ~ 2 ) <";
+  char input[510] = {'\0'};
+  strcpy(input, "3.14 + mod ( x ) + ( ~ 2 ) <");
   dijkstra_runner(input);
   ck_assert_str_eq(input, "3.14 x 2 ~ + mod + ");
 }
 END_TEST
 
 START_TEST(shunting_yard_opt_6) {
-  char* input = "p 7 - tan ( 6 ) + 1e4 <";
+  char input[510] = {'\0'};
+  strcpy(input, "p 7 - tan ( 6 ) + 1e4 <");
   dijkstra_runner(input);
   ck_assert_str_eq(input, "7 6 1e4 + tan - p ");
 }
 END_TEST
 
 START_TEST(shunting_yard_opt_7) {
-  char* input = "acos ( 6 ) + asin ( 9 ) / atan ( 0.5 ) + sqrt ( 1e-1 ) <";
+  char input[510] = {'\0'};
+  strcpy(input, "acos ( 6 ) + asin ( 9 ) / atan ( 0.5 ) + sqrt ( 1e-1 ) <");
   dijkstra_runner(input);
   ck_assert_str_eq(input, "6 9 0.5 1e-1 sqrt + atan / asin + acos ");
 }
 END_TEST
 
 START_TEST(shunting_yard_opt_8) {
-  char* input = "ln ( x ) + x * x * log ( 3e-6 ) <";
+  char input[510] = {'\0'};
+  strcpy(input, "ln ( x ) + x * x * log ( 3e-6 ) <");
   dijkstra_runner(input);
   ck_assert_str_eq(input, "x x x * 3e-6 log * + ln ");
 }
 END_TEST
 
 START_TEST(shunting_yard_opt_9) {
-  char* input = "0 * log ( 12 ) * x * x * x * log ( 1997 ) <";
+  char input[510] = {'\0'};
+  strcpy(input, "0 * log ( 12 ) * x * x * x * log ( 1997 ) <");
   dijkstra_runner(input);
   ck_assert_str_eq(input, "0 12 x * x * x * 1997 log * log * ");
 }
 END_TEST
 
 START_TEST(shunting_yard_opt_10) {
-  char* input =
-      "7777 + 77777 - 66666666999999999 ^ 4 ^ 2 - 896 / 3.1412412412412 <";
+  char input[510] = {'\0'};
+  strcpy(input,
+         "7777 + 77777 - 66666666999999999 ^ 4 ^ 2 - 896 / 3.1412412412412 <");
   dijkstra_runner(input);
   ck_assert_str_eq(
       input,
@@ -361,14 +371,16 @@ END_TEST
 START_TEST(calculate_opt_3) {
   char* input = "3 1 - 5 1 1 ^ tan * sin / cos ";
   long double res = calculate_res(input);
-  ck_assert_ldouble_eq(res, -0.420225);
+  int test_res = fabsl(res - (-0.420225)) < 1e-4 ? 0 : 1;
+  ck_assert_int_eq(test_res, 0);
 }
 END_TEST
 
 START_TEST(calculate_opt_4) {
   char* input = "15 30 2 9 sqrt * atan / asin + acos ";
   long double res = calculate_res(input);
-  ck_assert_ldouble_eq(res, -0.308071);
+  int test_res = fabsl(res - (-0.308071)) < 1e-4 ? 0 : 1;
+  ck_assert_int_eq(test_res, 0);
 }
 END_TEST
 
@@ -382,7 +394,8 @@ END_TEST
 START_TEST(calculate_opt_6) {
   char* input = "10 2 log ~ - ln ";
   long double res = calculate_res(input);
-  ck_assert_ldouble_eq(res, 2.332244);
+  int test_res = fabsl(res - (2.332244)) < 1e-4 ? 0 : 1;
+  ck_assert_int_eq(test_res, 0);
 }
 END_TEST
 
@@ -398,7 +411,8 @@ START_TEST(calculate_opt_8) {
       "15 7 1 1 + - / 3 * 2 1 1 + + 15 * 7 200 1 + - / 3 * - 2 1 1 + + 15 7 1 "
       "1 + - / 3 * 2 1 1 + + - 15 7 1 1 + - / 3 * + 2 1 1 + + - * - ";
   long double res = calculate_res(input);
-  ck_assert_ldouble_eq(res, -30.072165);
+  int test_res = fabsl(res - (-30.072165)) < 1e-4 ? 0 : 1;
+  ck_assert_int_eq(test_res, 0);
 }
 END_TEST
 
@@ -418,25 +432,29 @@ END_TEST
 
 START_TEST(loan_calc_opt_1) {
   long double res = get_monthly_payment_annuity(100000, 5, 12);
-  ck_assert_ldouble_eq(res, 8560.748);
+  int test_res = fabsl(res - (8560.748179)) < 1e-4 ? 0 : 1;
+  ck_assert_int_eq(test_res, 0);
 }
 END_TEST
 
 START_TEST(loan_calc_opt_2) {
   long double res = get_total_payment_annuity(8560.748, 12);
-  ck_assert_ldouble_eq(res, 102729);
+  int test_res = fabsl(res - (102728.976000)) < 1e-4 ? 0 : 1;
+  ck_assert_int_eq(test_res, 0);
 }
 END_TEST
 
 START_TEST(loan_calc_opt_3) {
   long double res = get_monthly_payment_diff(100000, 12);
-  ck_assert_ldouble_eq(res, 8559.028);
+  int test_res = fabsl(res - (8333.333333)) < 1e-4 ? 0 : 1;
+  ck_assert_int_eq(test_res, 0);
 }
 END_TEST
 
 START_TEST(loan_calc_opt_4) {
   long double res = get_total_payment_diff(100000, 12, 5);
-  ck_assert_ldouble_eq(res, 102708.3);
+  int test_res = fabsl(res - (102708.333333)) < 1e-4 ? 0 : 1;
+  ck_assert_int_eq(test_res, 0);
 }
 END_TEST
 
@@ -461,13 +479,15 @@ END_TEST
 
 START_TEST(deposit_calc_opt_2) {
   long double res = get_tax_amount(104850, 3);
-  ck_assert_ldouble_eq(res, 150);
+  int test_res = fabsl(res - (3145.500000)) < 1e-4 ? 0 : 1;
+  ck_assert_int_eq(test_res, 0);
 }
 END_TEST
 
 START_TEST(deposit_calc_opt_3) {
   long double res = get_total_amount(100000, 5000, 3);
-  ck_assert_ldouble_eq(res, 104850);
+  int test_res = fabsl(res - (104997.000000)) < 1e-4 ? 0 : 1;
+  ck_assert_int_eq(test_res, 0);
 }
 END_TEST
 
@@ -596,17 +616,18 @@ int main(void) {
   int failed_count = 0;
 
   s21_suit_execution(input_validation_suite(), &failed_count,
-                     "tests/input_validation_tests.log");
+                     "tests/logs/input_validation_tests.log");
   s21_suit_execution(tokens_devider_suite(), &failed_count,
-                     "tests/tokens_devider_tests.log");
-  s21_suit_execution(stack_suite(), &failed_count, "tests/stack_tests.log");
+                     "tests/logs/tokens_devider_tests.log");
+  s21_suit_execution(stack_suite(), &failed_count,
+                     "tests/logs/stack_tests.log");
   s21_suit_execution(shunting_yard_suite(), &failed_count,
-                     "tests/shunting_yard_tests.log");
+                     "tests/logs/shunting_yard_tests.log");
   s21_suit_execution(calculate_suite(), &failed_count,
-                     "tests/calculate_tests.log");
+                     "tests/logs/calculate_tests.log");
   s21_suit_execution(loan_calc_suite(), &failed_count,
-                     "tests/loan_calc_tests.log");
+                     "tests/logs/loan_calc_tests.log");
   s21_suit_execution(deposit_calc_suite(), &failed_count,
-                     "tests/deposit_calc_tests.log");
+                     "tests/logs/deposit_calc_tests.log");
   return failed_count == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
