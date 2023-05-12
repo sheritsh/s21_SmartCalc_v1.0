@@ -35,6 +35,6 @@ clean:
 
 valgrind_check: test
 	@CK_FORK=no valgrind --vgdb=no --leak-check=full \
-	--show-leak-kinds=all --track-origins=yes --log-file="controller_tests_vg.log" -v --verbose -q --quiet -s tests/controller_tests
+	--show-leak-kinds=all --track-origins=yes --log-file="controller_tests_vg.log" -v --verbose -q --quiet -s tests/test_controller
 	@CK_FORK=no valgrind --vgdb=no --leak-check=full \
-	--show-leak-kinds=all --track-origins=yes --log-file="module_tests_tests_vg.log" -v --verbose -q --quiet -s tests/module_tests
+	--show-leak-kinds=all --track-origins=yes --log-file="module_tests_tests_vg.log" -v --verbose -q --quiet -s tests/test_modules
