@@ -1,14 +1,14 @@
 #include "SmartCalc.h"
 
-// int main(int argc, char* argv[]) {
-//   if (argc > 1) {
-//     // smart_calc_init(argv[1]);
-//     long double res = 0;
-//     api_calculate_str_with_x(argv[1], -2, &res);
-//     printf("%Lf\n", res);
-//   }
-//   return 0;
-// }
+int main(int argc, char* argv[]) {
+  if (argc > 1) {
+    // smart_calc_init(argv[1]);
+    long double res = 0;
+    api_calculate_str(argv[1], &res);
+    // printf("%Lf\n", res);
+  }
+  return 0;
+}
 
 // int smart_calc_init(char* str) {
 //   if (str == NULL) {
