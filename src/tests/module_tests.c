@@ -272,12 +272,147 @@ START_TEST(stack_opt_2) {
 END_TEST
 
 START_TEST(shunting_yard_opt_1) {
-  // test
+  char* input = "25 + 25 <";
+  dijkstra_runner(input);
+  ck_assert_str_eq(input, "25 25 + ");
+}
+END_TEST
+
+START_TEST(shunting_yard_opt_2) {
+  char* input = "x ^ 2 ^ 3 * ( 2 ) <";
+  dijkstra_runner(input);
+  ck_assert_str_eq(input, "x 2 3 ^ ^ 2 * ");
+}
+END_TEST
+
+START_TEST(shunting_yard_opt_3) {
+  char* input = "cos ( 4 ) + sin ( 15 ) <";
+  dijkstra_runner(input);
+  ck_assert_str_eq(input, "4 15 sin + cos ");
+}
+END_TEST
+
+START_TEST(shunting_yard_opt_4) {
+  char* input = "2 ^ 2 - 16 + 4 * 55 / 7 <";
+  dijkstra_runner(input);
+  ck_assert_str_eq(input, "2 2 ^ 16 - 4 55 * 7 / + ");
+}
+END_TEST
+
+START_TEST(shunting_yard_opt_5) {
+  char* input = "3.14 + mod ( x ) + ( ~ 2 ) <";
+  dijkstra_runner(input);
+  ck_assert_str_eq(input, "3.14 x 2 ~ + mod + ");
+}
+END_TEST
+
+START_TEST(shunting_yard_opt_6) {
+  char* input = "p 7 - tan ( 6 ) + 1e4 <";
+  dijkstra_runner(input);
+  ck_assert_str_eq(input, "7 6 1e4 + tan - p ");
+}
+END_TEST
+
+START_TEST(shunting_yard_opt_7) {
+  char* input = "acos ( 6 ) + asin ( 9 ) / atan ( 0.5 ) + sqrt ( 1e-1 ) <";
+  dijkstra_runner(input);
+  ck_assert_str_eq(input, "6 9 0.5 1e-1 sqrt + atan / asin + acos ");
+}
+END_TEST
+
+START_TEST(shunting_yard_opt_8) {
+  char* input = "ln ( x ) + x * x * log ( 3e-6 ) <";
+  dijkstra_runner(input);
+  ck_assert_str_eq(input, "x x x * 3e-6 log * + ln ");
+}
+END_TEST
+
+START_TEST(shunting_yard_opt_9) {
+  char* input = "0 * log ( 12 ) * x * x * x * log ( 1997 ) <";
+  dijkstra_runner(input);
+  ck_assert_str_eq(input, "0 12 x * x * x * 1997 log * log * ");
+}
+END_TEST
+
+START_TEST(shunting_yard_opt_10) {
+  char* input =
+      "7777 + 77777 - 66666666999999999 ^ 4 ^ 2 - 896 / 3.1412412412412 <";
+  dijkstra_runner(input);
+  ck_assert_str_eq(
+      input,
+      "7777 77777 + 66666666999999999 4 2 ^ ^ - 896 3.1412412412412 / - ");
 }
 END_TEST
 
 START_TEST(calculate_opt_1) {
-  // test
+  char* input = "21 42 + ";
+  long double res = calculate_res(input);
+  ck_assert_ldouble_eq(res, 63.000000);
+}
+END_TEST
+
+START_TEST(calculate_opt_2) {
+  char* input = "2 2 + 1 ~ - mod ";
+  long double res = calculate_res(input);
+  ck_assert_ldouble_eq(res, 5.000000);
+}
+END_TEST
+
+START_TEST(calculate_opt_3) {
+  char* input = "3 1 - 5 1 1 ^ tan * sin / cos ";
+  long double res = calculate_res(input);
+  ck_assert_ldouble_eq(res, -0.420225);
+}
+END_TEST
+
+START_TEST(calculate_opt_4) {
+  char* input = "15 30 2 9 sqrt * atan / asin + acos ";
+  long double res = calculate_res(input);
+  ck_assert_ldouble_eq(res, -0.308071);
+}
+END_TEST
+
+START_TEST(calculate_opt_5) {
+  char* input = "2 2 3 ^ ^ ";
+  long double res = calculate_res(input);
+  ck_assert_ldouble_eq(res, 256.000000);
+}
+END_TEST
+
+START_TEST(calculate_opt_6) {
+  char* input = "10 2 log ~ - ln ";
+  long double res = calculate_res(input);
+  ck_assert_ldouble_eq(res, 2.332244);
+}
+END_TEST
+
+START_TEST(calculate_opt_7) {
+  char* input = "1e5 1e+4 1e-1 / + ";
+  long double res = calculate_res(input);
+  ck_assert_ldouble_eq(res, 200000.000000);
+}
+END_TEST
+
+START_TEST(calculate_opt_8) {
+  char* input =
+      "15 7 1 1 + - / 3 * 2 1 1 + + 15 * 7 200 1 + - / 3 * - 2 1 1 + + 15 7 1 "
+      "1 + - / 3 * 2 1 1 + + - 15 7 1 1 + - / 3 * + 2 1 1 + + - * - ";
+  long double res = calculate_res(input);
+  ck_assert_ldouble_eq(res, -30.072165);
+}
+END_TEST
+
+START_TEST(calculate_opt_9) {
+  char* input = "2 2 2 * + ";
+  long double res = calculate_res(input);
+  ck_assert_ldouble_eq(res, 6.000000);
+}
+END_TEST
+
+START_TEST(calculate_opt_10) {
+  char* input = "5 10 + 97 + 0 12 log * + ";
+  long double res = calculate_res(input);
+  ck_assert_ldouble_eq(res, 112.000000);
 }
 END_TEST
 
@@ -329,6 +464,42 @@ Suite* stack_suite(void) {
   return suite;
 }
 
+Suite* shunting_yard_suite(void) {
+  Suite* suite = suite_create("shunting_yard_tests");
+  TCase* tc_core = tcase_create("core_of_shunting_yard");
+  tcase_add_test(tc_core, shunting_yard_opt_1);
+  tcase_add_test(tc_core, shunting_yard_opt_2);
+  tcase_add_test(tc_core, shunting_yard_opt_3);
+  tcase_add_test(tc_core, shunting_yard_opt_4);
+  tcase_add_test(tc_core, shunting_yard_opt_5);
+  tcase_add_test(tc_core, shunting_yard_opt_6);
+  tcase_add_test(tc_core, shunting_yard_opt_7);
+  tcase_add_test(tc_core, shunting_yard_opt_8);
+  tcase_add_test(tc_core, shunting_yard_opt_9);
+  tcase_add_test(tc_core, shunting_yard_opt_10);
+  suite_add_tcase(suite, tc_core);
+
+  return suite;
+}
+
+Suite* calculate_suite(void) {
+  Suite* suite = suite_create("calculate_tests");
+  TCase* tc_core = tcase_create("core_of_calculate");
+  tcase_add_test(tc_core, calculate_opt_1);
+  tcase_add_test(tc_core, calculate_opt_2);
+  tcase_add_test(tc_core, calculate_opt_3);
+  tcase_add_test(tc_core, calculate_opt_4);
+  tcase_add_test(tc_core, calculate_opt_5);
+  tcase_add_test(tc_core, calculate_opt_6);
+  tcase_add_test(tc_core, calculate_opt_7);
+  tcase_add_test(tc_core, calculate_opt_8);
+  tcase_add_test(tc_core, calculate_opt_9);
+  tcase_add_test(tc_core, calculate_opt_10);
+  suite_add_tcase(suite, tc_core);
+
+  return suite;
+}
+
 /*  SUITES EXECUTION SCRIPT */
 
 void s21_suit_execution(Suite* suite, int* failed_count, char* suite_name) {
@@ -349,6 +520,10 @@ int main(void) {
   s21_suit_execution(tokens_devider_suite(), &failed_count,
                      "tests/tokens_devider_tests.log");
   s21_suit_execution(stack_suite(), &failed_count, "tests/stack_tests.log");
+  s21_suit_execution(shunting_yard_suite(), &failed_count,
+                     "tests/shunting_yard_tests.log");
+  s21_suit_execution(calculate_suite(), &failed_count,
+                     "tests/calculate_tests.log");
 
   return failed_count == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }

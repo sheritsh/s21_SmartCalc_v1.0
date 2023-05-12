@@ -65,10 +65,15 @@ int api_calculate_str(const char* str, long double* res) {
       missing_mult_signs_handler(token_str);
       unary_operators_handler(token_str);
       add_end_of_line(token_str);
+
       is_error = !dijkstra_runner(token_str);
+      printf("input [%s]\n", token_str);
+      long double rez;
       if (!is_error) {
-        *res = calculate_res(token_str);
+        // *res = calculate_res(token_str);
+        rez = calculate_res(token_str);
       }
+      printf("input [%Lf]\n", rez);
       free(token_str);
       token_str = NULL;
     }

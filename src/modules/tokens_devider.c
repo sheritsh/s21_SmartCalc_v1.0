@@ -37,7 +37,7 @@ char* token_divider(char* str) {
       strcat(output_str, " ");
     }
   }
-  printf("[%s]\n", output_str);
+
   return output_str;
 }
 
