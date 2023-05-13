@@ -1,7 +1,7 @@
 #ifndef SHUNTING_YARD_H
 #define SHUNTING_YARD_H
 
-#include "../../SmartCalc.h"
+#include "../../smart_calc_controller.h"
 #include "stack.h"
 
 /* OPERAND PRIORITY */

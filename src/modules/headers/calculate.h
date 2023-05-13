@@ -1,7 +1,7 @@
 #ifndef CALCULATE_H
 #define CALCULATE_H
 
-#include "../../SmartCalc.h"
+#include "../../smart_calc_controller.h"
 #include "stack.h"
 
 /**

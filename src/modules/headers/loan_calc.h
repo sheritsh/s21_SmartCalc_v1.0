@@ -1,7 +1,7 @@
 #ifndef LOAN_CALC_H
 #define LOAN_CALC_H
 
-#include "../../SmartCalc.h"
+#include "../../smart_calc_controller.h"
 
 /**
  * @brief Calculate the monthly payment for an annuity loan

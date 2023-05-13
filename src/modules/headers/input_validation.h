@@ -1,7 +1,7 @@
 #ifndef INPUT_VALIDATION_H
 #define INPUT_VALIDATION_H
 
-#include "../../SmartCalc.h"
+#include "../../smart_calc_controller.h"
 
 // define commonly used data types for convenience
 #define PERMITTED_SYMBOLS "1234567890()+-*/^mcstalx.e"

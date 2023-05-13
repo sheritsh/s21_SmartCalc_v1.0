@@ -1,7 +1,7 @@
 #ifndef TOKENS_DEVIDER_H
 #define TOKENS_DEVIDER_H
 
-#include "../../SmartCalc.h"
+#include "../../smart_calc_controller.h"
 
 /**
  * @brief The function splits strings into space-separated tokens

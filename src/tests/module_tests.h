@@ -4,7 +4,7 @@
 
 #include <check.h>
 
-#include "../SmartCalc.h"
+#include "../smart_calc_controller.h"
 
 enum test_res { FAILURE, SUCCESS };
 

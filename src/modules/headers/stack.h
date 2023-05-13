@@ -13,7 +13,7 @@ typedef struct double_stack_struct {
   long double *values;
 } double_stack_t;
 
-#include "../../SmartCalc.h"
+#include "../../smart_calc_controller.h"
 
 /* CHAR* STACK FUNCTIONS */
 

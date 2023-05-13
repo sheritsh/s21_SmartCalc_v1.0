@@ -1,7 +1,7 @@
 #ifndef DEPOSIT_CALC_H
 #define DEPOSIT_CALC_H
 
-#include "../../SmartCalc.h"
+#include "../../smart_calc_controller.h"
 
 enum mode { MONTHLY, YEARLY };
 

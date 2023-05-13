@@ -2,8 +2,6 @@
 
 #include "controller_tests.h"
 
-#include "../SmartCalc.h"
-
 /*  TEST OPTIONS */
 
 START_TEST(api_calc_opt_1) {
