@@ -7,19 +7,18 @@ namespace Ui {
 class rpn_window;
 }
 
-class rpn : public QDialog
-{
-    Q_OBJECT
+class rpn : public QDialog {
+  Q_OBJECT
 
-public:
-    explicit rpn(QWidget *parent = nullptr);
-    ~rpn();
+ public:
+  explicit rpn(QWidget *parent = nullptr);
+  ~rpn();
 
-public slots:
-    void rpn_slot(char *str);
+ public slots:
+  void rpn_slot(char *str);
 
-private:
-    Ui::rpn_window *ui;
+ private:
+  Ui::rpn_window *ui;
 };
 
-#endif // RPN_H
+#endif  // RPN_H

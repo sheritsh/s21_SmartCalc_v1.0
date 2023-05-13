@@ -9,22 +9,21 @@ namespace Ui {
 class credit;
 }
 
-class credit : public QDialog
-{
-    Q_OBJECT
+class credit : public QDialog {
+  Q_OBJECT
 
-public:
-    explicit credit(QWidget *parent = nullptr);
-    ~credit();
+ public:
+  explicit credit(QWidget *parent = nullptr);
+  ~credit();
 
-private slots:
-    void on_calc_btn_clicked();
+ private slots:
+  void on_calc_btn_clicked();
 
-private:
-    Ui::credit *ui;
-    QDoubleValidator loan_amount_validator;
-    QDoubleValidator term_validator;
-    QDoubleValidator interest_rate_validator;
+ private:
+  Ui::credit *ui;
+  QDoubleValidator loan_amount_validator;
+  QDoubleValidator term_validator;
+  QDoubleValidator interest_rate_validator;
 };
 
-#endif // CREDIT_H
+#endif  // CREDIT_H

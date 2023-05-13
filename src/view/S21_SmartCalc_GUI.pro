@@ -9,14 +9,15 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    ../C7_SmartCalc_v1.0-1/src/smart_calc_controller.c \
-    ../C7_SmartCalc_v1.0-1/src/modules/calculate.c \
-    ../C7_SmartCalc_v1.0-1/src/modules/deposit_calc.c \
-    ../C7_SmartCalc_v1.0-1/src/modules/input_validation.c \
-    ../C7_SmartCalc_v1.0-1/src/modules/loan_calc.c \
-    ../C7_SmartCalc_v1.0-1/src/modules/shunting_yard.c \
-    ../C7_SmartCalc_v1.0-1/src/modules/stack.c \
-    ../C7_SmartCalc_v1.0-1/src/modules/tokens_devider.c \
+    ../smart_calc_controller.c \
+    ../modules/calculate.c \
+    ../modules/deposit_calc.c \
+    ../modules/input_validation.c \
+    ../modules/loan_calc.c \
+    ../modules/shunting_yard.c \
+    ../modules/stack.c \
+    ../modules/tokens_devider.c \
+    about.cpp \
     credit.cpp \
     deposit.cpp \
     main.cpp \
@@ -26,14 +27,15 @@ SOURCES += \
     rpn.cpp
 
 HEADERS += \
-    ../C7_SmartCalc_v1.0-1/src/smart_calc_controller.h \
-    ../C7_SmartCalc_v1.0-1/src/modules/headers/calculate.h \
-    ../C7_SmartCalc_v1.0-1/src/modules/headers/deposit_calc.h \
-    ../C7_SmartCalc_v1.0-1/src/modules/headers/input_validation.h \
-    ../C7_SmartCalc_v1.0-1/src/modules/headers/loan_calc.h \
-    ../C7_SmartCalc_v1.0-1/src/modules/headers/shunting_yard.h \
-    ../C7_SmartCalc_v1.0-1/src/modules/headers/stack.h \
-    ../C7_SmartCalc_v1.0-1/src/modules/headers/tokens_devider.h \
+    ../smart_calc_controller.h \
+    ../modules/headers/calculate.h \
+    ../modules/headers/deposit_calc.h \
+    ../modules/headers/input_validation.h \
+    ../modules/headers/loan_calc.h \
+    ../modules/headers/shunting_yard.h \
+    ../modules/headers/stack.h \
+    ../modules/headers/tokens_devider.h \
+    about.h \
     credit.h \
     deposit.h \
     mainwindow.h \
@@ -42,6 +44,7 @@ HEADERS += \
     rpn.h
 
 FORMS += \
+    about.ui \
     credit.ui \
     deposit.ui \
     mainwindow.ui \
