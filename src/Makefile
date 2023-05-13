@@ -33,7 +33,7 @@ install:
 	@echo "┏=========================================┓"
 	@echo "┃    The installation was successful.     ┃"
 	@echo "┃     The project is located in the       ┃"
-	@echo "┃		build folder and on the desktop.     ┃"
+	@echo "┃    build folder and on the desktop.     ┃"
 	@echo "┗=========================================┛"
 
 uninstall:
