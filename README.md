@@ -1,9 +1,9 @@
 # SmartCalc v1.0
 
 This project is part of the curriculum of [School 21](https://21-school.ru/). According to task, an extended version of the calculator was implemented in the C programming language using structured programming. In addition to basic arithmetic operations such as add/subtract and multiply/divide, calculator can calculate arithmetic expressions by following the order, as well as some mathematical functions (sine, cosine, logarithm, etc.).  
-In addition to calculating expressions, the calculator also supports the use of the _x_ variable and plotting the corresponding function. There is also a built-in loan and deposit calculator. The project is written using the MVC pattern. Logic and graphical interface have been separated, all modules are covered with tests. For the visual part of the project, the Qt framework was used.  
+In addition to calculating expressions, the calculator also supports the use of the _x_ variable and plotting the corresponding function. There is also a built-in loan and deposit calculator. The project is written using the MVC pattern. Logic and graphical interface have been separated, all modules are covered with tests. For the visual part of the project, the Qt framework was used.
 
-Russian version of README you can find [here](./README_RUS.md)  
+Russian version of README you can find [here](./README_RUS.md)
 
 ![SmartCalc](misc/img/smartcalclogo.jpg)
 
@@ -21,26 +21,26 @@ You will need the following utilities to install `gcc`, `make` and `qmake`
 
 ##### Makefile targets:
 
-* **install**  
-Installs the calculator in the build folder and on the desktop
+- **install**  
+  Installs the calculator in the build folder and on the desktop
 
-* **uninstall**  
-Uninstall the calculator
+- **uninstall**  
+  Uninstall the calculator
 
-* **dvi**  
-Opens project documentation
+- **dvi**  
+  Opens project documentation
 
-* **dist**  
-Generates distribution `.tgz` with an executable and necessary documentation
+- **dist**  
+  Generates distribution `.tgz` with an executable and necessary documentation
 
-* **test**  
-Start testing calculator modules and its controller. The report can be viewed in the /tests/logs folder
+- **test**  
+  Start testing calculator modules and its controller. The report can be viewed in the `/tests/logs` folder
 
-* **gcov_report**  
-Generates an html report displaying the coverage of all functions by tests
+- **gcov_report**  
+  Generates an html report displaying the coverage of all functions by tests
 
-* **valgrind_check**  
-Initializes the check of the project by the valgrind utility, after which log files with reports are created
+- **valgrind_check**  
+  Initializes the check of the project by the valgrind utility, after which log files with reports are created
 
 ## Calculator overview
 
