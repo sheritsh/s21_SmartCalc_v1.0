@@ -1,4 +1,4 @@
-qcustomplot.h -linguist-vendored
-src/view/qcustomplot.h -linguist-vendored
-qcustomplot.cpp -linguist-vendored
-src/view/qcustomplot.cpp -linguist-vendored
+qcustomplot.h -linguist-vendored=true
+src/view/qcustomplot.h -linguist-vendored=true
+qcustomplot.cpp -linguist-vendored=true
+src/view/qcustomplot.cpp -linguist-vendored=true
